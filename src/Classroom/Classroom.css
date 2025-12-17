@@ -1,0 +1,31 @@
+/* src/components/Classroom/Classroom.css */
+
+.classroom {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.wall {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 70%;
+  background: linear-gradient(to bottom, #f3f0ea, #e4dfd6);
+}
+
+.floor {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 30%;
+  background: linear-gradient(to top, #7a4a23, #9c6a3c);
+}
+
+.input-wrapper {
+  position: absolute;
+  right: 5%;
+  top: 65%; /* direkt unterhalb der Tafel */
+  width: 45%; /* gleiche Breite wie Tafel */
+}

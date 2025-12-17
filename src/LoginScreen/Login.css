@@ -1,0 +1,15 @@
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* zentriert alle Elemente horizontal */
+  gap: 10px; /* Abstand zwischen Inputs und Button */
+    position: absolute;
+  top: 30%;
+  right: 30%;
+  width: 45%;
+  height: 45%;
+}
+
+button {
+  margin-top: 10px; /* optional: Abstand zum oberen Input */
+}
