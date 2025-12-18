@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { Login } from "./Login";
 import { LoginScreen } from "./LoginScreen";
+import { ReturnButton } from "../Buttons/ReturnButton";
+import "../Buttons/ReturnButton.css";
+import "./RegisterForm.css";
+
+
 export const RegisterForm = () => {
+    const [goBack, setGoBack] = useState(false);
     const [Name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
@@ -24,23 +30,34 @@ export const RegisterForm = () => {
     setRegistered(true);
     
     }
-
-
-
+    
     }
+    
+
+const returnToLoginScreen = () => {
+  setGoBack(true);
+};
+
+if (goBack || registered) {
+  return <LoginScreen />;
+}
+
+
 
     if (registered) {
     return <LoginScreen />;
     }
 
     return (
+    <div className ="register-form">
+    <ReturnButton onClick={returnToLoginScreen} />
     <form onSubmit={handleSubmit}>
     <input 
     type="text" 
     placeholder="Name" 
     value={Name} 
     onChange={(e) => setName(e.target.value)} />
-    <br />
+
     <input 
     type="password" 
     placeholder="Passwort" 
@@ -52,14 +69,15 @@ export const RegisterForm = () => {
     placeholder="E-Mail" 
     value={email} 
     onChange={(e) => setEmail(e.target.value)} />
-    <br />
+    
     <input 
     type="email" 
     placeholder="E-Mail bestätigen" 
     value={confirmEmail} 
     onChange={(e) => setConfirmEmail(e.target.value)} />
-    <br />
+    
     <button type="submit">Registrieren</button>
     </form>
+    </div>
     )
     };
