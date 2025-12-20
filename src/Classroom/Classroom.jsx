@@ -8,6 +8,7 @@ import { LogoutButton } from "../LoginScreen/LogoutButton";
 import { Sidebar } from "./Sidebar/Sidebar";
 import { SidebarButton } from "../Buttons/SidebarButton";
 import { useState } from "react";
+import TextToSpeech from "../TextToSpeech/TextToSpeech";
 
  export const Classroom = ({username}) => {
 
@@ -20,7 +21,10 @@ import { useState } from "react";
       <div className="floor" />
 
       <div className="board-wrapper">
-        <Board />
+        <Board text="Dies ist nur ein kurzer Platzhaltertext, um die Text to Speech Funktionalität zu testen." />
+        <div className="tts">
+          <TextToSpeech text="Dies ist nur ein kurzer Platzhaltertext, um die Text to Speech Funktionalität zu testen." lang="de-DE" />
+        </div>
         <div className="input-wrapper">
           <InputField /> 
           <UseVoiceButton  />

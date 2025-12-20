@@ -23,6 +23,13 @@
   background: linear-gradient(to top, #7a4a23, #9c6a3c);
 }
 
+.tts {
+  position: absolute;
+  right: 5%;
+  top: 60%;
+  width: 45%;
+}
+
 .input-wrapper {
   position: absolute;
   right: 5%;
