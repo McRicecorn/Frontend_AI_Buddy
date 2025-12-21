@@ -1,0 +1,27 @@
+.character-container {
+  position: absolute;
+  left: 5%;
+  bottom: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.character-avatar {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #ddd;
+  border: 4px solid #6b4a2b;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 80px;
+}
+
+.character-name {
+  margin-top: 10px;
+  font-weight: bold;
+}

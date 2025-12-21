@@ -1,0 +1,20 @@
+
+.user-message {
+  align-self: flex-end;       
+  background-color: #cce5ff;
+  padding: 8px;
+  border-radius: 8px;
+  max-width: 70%;            
+  word-wrap: break-word;     
+  white-space: pre-wrap;    
+}
+
+.ai-message {
+  align-self: flex-start;   
+  background-color: #e6e6e6;
+  padding: 8px;
+  border-radius: 8px;
+  max-width: 70%;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}

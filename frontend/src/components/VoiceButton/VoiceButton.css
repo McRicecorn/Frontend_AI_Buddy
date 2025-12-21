@@ -1,0 +1,18 @@
+.voice-button {
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 50%;
+  border: 2px solid #6b4a2b;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.voice-button:hover {
+  background-color: #ddd;
+}
+
+.voice-button.active {
+  background-color: #ffcccc;
+  border-color: red;
+}

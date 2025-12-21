@@ -1,0 +1,21 @@
+
+.classroom-container {
+  width: 100vw;
+  height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  display: flex;
+  background-color: #f0f8ff;
+  overflow: hidden;
+}
+
+.right-side {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 5%;
+  gap: 10px;
+}
