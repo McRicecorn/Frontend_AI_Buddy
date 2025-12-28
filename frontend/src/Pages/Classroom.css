@@ -1,21 +1,49 @@
-
-.classroom-container {
+.classroom {
   width: 100vw;
   height: 100vh;
-  min-width: 100vw;
-  min-height: 100vh;
-  max-width: 100vw;
-  max-height: 100vh;
+
   display: flex;
-  background-color: #f0f8ff;
-  overflow: hidden;
+
+  background: linear-gradient(
+    to bottom,
+    #f3ead7 0%,
+    #f3ead7 78%,
+    #d6c2a1 78%,
+    #d6c2a1 100%
+  );
 }
 
-.right-side {
-  flex: 2;
+
+.left {
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.middle {
+  width: 60%;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding-top: 5%;  
+  padding-left:23%; 
+}
+
+
+.right {
+  width: 100vw;
+  height: 100vh;              
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  padding: 5%;
-  gap: 10px;
+
+  padding-top: 5%;
+  padding-right: 0.1%;
+
 }
+
