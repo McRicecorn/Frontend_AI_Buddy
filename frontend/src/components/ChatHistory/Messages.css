@@ -7,6 +7,7 @@
   max-width: 70%;            
   word-wrap: break-word;     
   white-space: pre-wrap;    
+  color:#000000
 }
 
 .ai-message {
@@ -17,4 +18,10 @@
   max-width: 70%;
   word-wrap: break-word;
   white-space: pre-wrap;
+  color:#000000;
+}
+
+.timestamp {
+  font-size: 0.75rem;      /* kleiner */
+  color: #888;             /* grau */
 }

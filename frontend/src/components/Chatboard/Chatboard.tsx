@@ -1,10 +1,10 @@
 import React, { useRef, useEffect } from 'react';
 import Message from '../ChatHistory/Messages';
-import type { ChatMessage } from '../../Interfaces';
+import type { IChatMessage } from '../../Interfaces/IChatMessage';
 import './ChatBoard.css';
 
 interface ChatBoardProps {
-  messages: ChatMessage[];
+  messages: IChatMessage[];
 }
 
 export const ChatBoard: React.FC<ChatBoardProps> = ({ messages }) => {
