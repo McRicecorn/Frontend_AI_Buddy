@@ -16,6 +16,7 @@
   flex-direction: column;
  
   overflow-y: auto;
+  
 }
 
 
@@ -34,4 +35,10 @@
   padding: 8px;
   border-radius: 8px;
   max-width: 70%;
+}
+.user-message,
+.ai-message {
+  word-wrap: break-word;     /* alte Browser */
+  overflow-wrap: break-word; /* moderne Browser */
+  white-space: pre-line;     /* behält Absätze bei */
 }
