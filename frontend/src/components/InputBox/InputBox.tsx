@@ -1,20 +1,27 @@
 import React, { useState } from 'react';
 import './InputBox.css';
 import VoiceButton from '../VoiceButton/VoiceButton';
+import type { IChatMessage } from '../../Interfaces/IChatMessage';
 
 interface InputBoxProps {
-  onSend: (message: string) => void;
+  onSend: (message: IChatMessage) => void;
 }
 
 const InputBox: React.FC<InputBoxProps> = ({ onSend }) => {
   const [input, setInput] = useState<string>(''); 
 
   const handleSend = () => {
-    if (input.trim() !== '') {
-      onSend(input);   
-      setInput('');   
-    }
+  const newMsg: IChatMessage = {
+    id: Date.now().toString(),
+    sender: 'user',        
+    text: input,
+    timestamp: new Date()
   };
+  onSend(newMsg);
+  setInput('');
+};
+
+
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {

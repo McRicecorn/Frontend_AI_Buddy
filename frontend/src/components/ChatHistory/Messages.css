@@ -18,3 +18,8 @@
   word-wrap: break-word;
   white-space: pre-wrap;
 }
+
+.timestamp {
+  font-size: 0.75rem;      /* kleiner */
+  color: #888;             /* grau */
+}

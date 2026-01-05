@@ -2,7 +2,7 @@ import React from 'react';
 import Character from '../components/Character/Character';
 import { ChatBoard } from '../components/Chatboard/Chatboard';
 import InputBox from '../components/InputBox/InputBox';
-import type { ChatMessage } from '../Interfaces';
+import type { IChatMessage } from '../Interfaces/IChatMessage';
 import StatusBar from '../components/Status/StatusBar';
 import { MediaPanel } from '../components/MediaPanel/MediaPanel';
 import { MediaItem } from '../components/MediaItem/MediaItem';
@@ -11,8 +11,8 @@ import './Classroom.css'
 
 interface ClassroomProps {
   username: string;
-  messages: ChatMessage[];
-  onSend: (text: string) => void;
+  messages: IChatMessage[];
+  onSend: (text: IChatMessage) => void;
 }
 
 const dummyMedia1 = new MediaItem(
