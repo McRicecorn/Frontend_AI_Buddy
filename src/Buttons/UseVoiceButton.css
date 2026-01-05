@@ -1,0 +1,29 @@
+.voice-button {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 2px solid #6b4a2b; /* Holzfarbe passend zur Tafel */
+  background: linear-gradient(to bottom, #2a513d, #1f3d2b);
+  color: #e6f2ea; /* Kreideweiß */
+  font-family: "Comic Sans MS", "Chalkboard", sans-serif;
+  font-weight: bold;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hover-Effekt */
+.voice-button:hover {
+  background: linear-gradient(to bottom, #3b664e, #2a513d);
+  transform: scale(1.05);
+  box-shadow: 0 6px 10px rgba(0,0,0,0.4);
+}
+
+/* Klick-Effekt */
+.voice-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+}

@@ -1,0 +1,19 @@
+/* src/components/InputField/InputField.css */
+
+input {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 2px solid #6b4a2b; /* Holzfarbe passend zur Tafel */
+  background-color: #fff;
+  font-size: 1rem;
+  outline: none;
+  box-sizing: border-box;
+  font-family: "Comic Sans MS", "Chalkboard", sans-serif;
+  transition: border 0.2s;
+  color: #333;
+}
+
+input:focus {
+  border-color: #1f3d2b; /* Tafel-Grün */
+}

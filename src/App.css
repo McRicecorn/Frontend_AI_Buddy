@@ -1,0 +1,22 @@
+/* App.css */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.classroom-background {
+  width: 100vw;
+  height: 100vh;
+
+  background-image: url("./assets/classroom-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* wichtig für spätere Inhalte */
+  display: flex;
+  position: relative;
+}
