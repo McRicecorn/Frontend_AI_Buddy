@@ -35,7 +35,7 @@ function App() {
   const [username, setUsername] = useState<string | null>(null)
   const [password, setPassword] = useState<string | null>(null)
   const [messages, setMessages] = useState<IChatMessage[]>([
-    { from: 'ai', text: 'Hallo! Ich bin dein AI Buddy.' },
+    { id: '1', sender: 'ai', text: 'hi', timestamp: new Date() },
   ])
 
   const handleLogin = (name: string, pw: string) => {

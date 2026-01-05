@@ -27,7 +27,7 @@ const timeString = message.timestamp.toLocaleTimeString('de-DE', {
     <div className={message.sender === 'user' ? 'user-message' : 'ai-message'}>
        {`${displayName}: ${message.text}`  }
        <div className='timestamp'>
-       {timeString}`
+       {timeString}
       </div>
     </div>
   );
