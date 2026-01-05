@@ -6,7 +6,7 @@ import type { IChatMessage } from './Interfaces/IChatMessage';
 
 const theme = createTheme({
   colorSchemes: {
-    dark: false,
+    dark: true,
   },
   palette: { // bei Bedarf anpassen
     primary: {
