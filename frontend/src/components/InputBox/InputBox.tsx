@@ -11,7 +11,7 @@ const InputBox: React.FC<InputBoxProps> = ({ onSend }) => {
   const [input, setInput] = useState<string>('');
     const handleSend = () => {
 
-     
+
     const newMsg: IChatMessage = {
     id: Date.now().toString(),
     sender: 'user',
