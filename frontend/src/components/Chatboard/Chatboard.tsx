@@ -8,14 +8,15 @@ interface ChatBoardProps {
 }
 
 export const ChatBoard: React.FC<ChatBoardProps> = ({ messages }) => {
-  const boardRef = useRef<HTMLDivElement>(null); 
+  const boardRef = useRef<HTMLDivElement>(null);
 
- 
+
   useEffect(() => {
     if (boardRef.current) {
       boardRef.current.scrollTop = boardRef.current.scrollHeight;
     }
-  }, [messages]); 
+
+  }, [messages]);
 
   return (
     <div className="chat-board" ref={boardRef}>

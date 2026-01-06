@@ -14,31 +14,29 @@
 
   display: flex;
   flex-direction: column;
- 
+
   overflow-y: auto;
-  
+
 }
 
-
-
 .user-message {
-  align-self: flex-end;       
-  background-color: #cce5ff;  
+  align-self: flex-end;
+  background-color: #cce5ff;
   padding: 8px;
   border-radius: 8px;
   max-width: 70%;
 }
 
 .ai-message {
-  align-self: flex-start;    
-  background-color: #e6e6e6; 
+  align-self: flex-start;
+  background-color: #e6e6e6;
   padding: 8px;
   border-radius: 8px;
   max-width: 70%;
 }
 .user-message,
 .ai-message {
-  word-wrap: break-word;     /* alte Browser */
-  overflow-wrap: break-word; /* moderne Browser */
-  white-space: pre-line;     /* behält Absätze bei */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-line;
 }
