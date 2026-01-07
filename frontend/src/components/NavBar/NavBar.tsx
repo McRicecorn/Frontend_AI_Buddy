@@ -1,0 +1,123 @@
+import React from 'react'
+import { AppBar, Box, Toolbar, Typography, IconButton, MenuItem, Menu, MenuList, Tooltip, Avatar, ListItemIcon, ListItemText} from '@mui/material'
+import MenuIcon from '@mui/icons-material/Menu'
+import SettingsIcon from '@mui/icons-material/Settings'
+import LogoutIcon from '@mui/icons-material/Logout'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import type { INavBarProps } from '../../Interfaces/INavBarProps'
+
+const NavBar: React.FC<INavBarProps>  = ({ username }) => {
+    // profile
+    const [anchorElProfile, setAnchorElProfile] = React.useState<null | HTMLElement>(null)
+
+    const handleOpenProfile = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorElProfile(event.currentTarget)
+    }
+
+    const handleCloseProfile = () => {
+        setAnchorElProfile(null)
+    }
+
+    // menu
+    const [anchorElMenu, setAnchorElMenu] = React.useState<null | HTMLElement>(null)
+
+    const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorElMenu(event.currentTarget)
+    }
+
+    const handleCloseMenu = () => {
+        setAnchorElMenu(null)
+    }
+
+    return (
+        <Box sx={{ flexGrow: 1, p: 2}}>
+            <AppBar position="sticky" sx={{
+                    borderRadius: 4,
+                    mx: "auto", 
+                    width: "calc(100% - 32px)"
+                }}>
+                <Toolbar>
+                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        AI Buddy
+                    </Typography>
+                    <div>
+                        <Tooltip title={username} arrow>
+                            <IconButton
+                                size="large"
+                                aria-label="profile"
+                                onClick={handleOpenProfile}
+                                color="inherit"
+                            >
+                                <Avatar sx={{ width: 32, height: 32, bgcolor: "secondary.main" }}>{username.charAt(0).toUpperCase()}</Avatar>
+                            </IconButton>
+                        </Tooltip>
+                        <Menu
+                            anchorEl={anchorElProfile}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            open={Boolean(anchorElProfile)}
+                            onClose={handleCloseProfile}
+                            slotProps={{
+                                paper: {
+                                    sx: { borderRadius: 4 }
+                                }
+                            }}
+                        >
+                        <MenuList sx={{py: 0}}>
+                            <MenuItem onClick={handleCloseMenu}><ListItemIcon><AccountCircleIcon sx={{ mr: 2 }}/></ListItemIcon><ListItemText sx={{ mr: 1 }}>Profil</ListItemText></MenuItem>
+                            <MenuItem onClick={handleCloseMenu}><ListItemIcon><LogoutIcon sx={{ mr: 2 }}/></ListItemIcon><ListItemText sx={{ mr: 1 }}>Abmelden</ListItemText></MenuItem>
+                        </MenuList>
+                        </Menu>
+                    </div>
+                    <div>
+                        <Tooltip title="Menü" arrow>
+                            <IconButton
+                                size="large"
+                                aria-label="menu"
+                                onClick={handleOpenMenu}
+                                color="inherit"
+                            >
+                                <MenuIcon />
+                            </IconButton>
+                        </Tooltip>
+                        <Menu
+                            anchorEl={anchorElMenu}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            open={Boolean(anchorElMenu)}
+                            onClose={handleCloseMenu}
+                            slotProps={{
+                                paper: {
+                                    sx: { borderRadius: 4 }
+                                }
+                            }}
+                        >
+                            <MenuList sx={{py: 0}}>
+                                <MenuItem onClick={handleCloseMenu}><ListItemIcon><SettingsIcon sx={{ mr: 2 }}/></ListItemIcon><ListItemText sx={{ mr: 1 }}>Einstellungen</ListItemText></MenuItem>
+                                <MenuItem onClick={handleCloseMenu}><ListItemIcon><SettingsIcon sx={{ mr: 2 }}/></ListItemIcon><ListItemText sx={{ mr: 1 }}>Einstellungen</ListItemText></MenuItem>
+                                <MenuItem onClick={handleCloseMenu}><ListItemIcon><SettingsIcon sx={{ mr: 2 }}/></ListItemIcon><ListItemText sx={{ mr: 1 }}>Einstellungen</ListItemText></MenuItem>
+                                <MenuItem onClick={handleCloseMenu}><ListItemIcon><SettingsIcon sx={{ mr: 2 }}/></ListItemIcon><ListItemText sx={{ mr: 1 }}>Einstellungen</ListItemText></MenuItem>
+                            </MenuList>
+                        </Menu>
+                    </div>
+                </Toolbar>
+            </AppBar>
+        </Box>
+    )
+}
+
+export default NavBar

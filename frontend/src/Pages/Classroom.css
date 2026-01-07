@@ -2,8 +2,6 @@
   width: 100vw;
   height: 100vh;
 
-  display: flex;
-
   background: linear-gradient(
     to bottom,
     #f3ead7 0%,
@@ -13,6 +11,12 @@
   );
 }
 
+.content {
+  display: flex;
+  flex: 1;
+  margin-left: 32px;
+  margin-right: 32px;
+}
 
 .left {
   width: 30%;
@@ -22,7 +26,6 @@
   align-items: center;
   
 }
-
 
 .middle {
   width: 60%;
@@ -35,7 +38,6 @@
   padding-top: 5%;  
   padding-left:10%; 
 }
-
 
 .right {
   width: 100vw;

@@ -8,6 +8,7 @@ import { MediaPanel } from '../components/MediaPanel/MediaPanel';
 import { MediaItem } from '../components/MediaItem/MediaItem';
 import { MediaType } from '../enums/MediaType';
 import './Classroom.css'
+import NavBar from '../components/NavBar/NavBar';
 
 interface ClassroomProps {
   username: string;
@@ -35,20 +36,23 @@ let dummyMedia = [dummyMedia1,dummyMedia2]
 const Classroom: React.FC<ClassroomProps> = ({ username, messages, onSend }) => {
   return (
     <div className="classroom">
-      <div className='left'>
-        <Character />
-        <StatusBar username={username} />
-      </div>
+      <NavBar username={username} />
 
-      <div className='middle'>
-        <MediaPanel media={dummyMedia}/>
-      </div>  
+      <div className="content">
+        <div className='left'>
+          <Character />
+          <StatusBar username={username} />
+        </div>
+
+        <div className='middle'>
+          <MediaPanel media={dummyMedia}/>
+        </div>  
 
 
-      <div className="right">
-        <ChatBoard messages={messages} />
-        <InputBox onSend={onSend} />
-    
+        <div className="right">
+          <ChatBoard messages={messages} />
+          <InputBox onSend={onSend} />
+        </div>
       </div>
     </div>
   );
