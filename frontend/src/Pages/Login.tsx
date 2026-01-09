@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Stack, Card, Divider, CardContent, Typography, Button, TextField, Alert, Fade } from '@mui/material';
-import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
+import LoginIcon from '@mui/icons-material/Login';
 
 import './Login.css';
 
@@ -37,10 +37,10 @@ export const Login: React.FC<LoginProps> = ({ onLogin }) => {
                 <Alert severity="error">Dein Benutzername oder dein Passwort ist falsch!</Alert>
               </Fade>
             )}
-            <TextField label="Dein Benutzername" variant="outlined" fullWidth margin="normal" value={username} onChange={(e) => setUsername(e.target.value)} error={alertOpen} onKeyDown={(e) => {if (e.key === "Enter" && !(username.trim() === "" || password.trim() === "")) handleSubmit(e)}} />
-            <TextField label="Dein Passwort" variant="outlined" fullWidth margin="normal" value={password} onChange={(e) => setPassword(e.target.value)} error={alertOpen} type="password" onKeyDown={(e) => {if (e.key === "Enter" && !(username.trim() === "" || password.trim() === "")) handleSubmit(e)}} />
-            <Button variant="contained" fullWidth onClick={handleSubmit} endIcon={<MeetingRoomIcon />} disabled={username.trim() === "" || password.trim() === ""}>
-              <Typography variant="button">Ins Klassenzimmer</Typography>
+            <TextField label="Benutzername" variant="outlined" fullWidth margin="normal" value={username} onChange={(e) => setUsername(e.target.value)} error={alertOpen} onKeyDown={(e) => {if (e.key === "Enter" && !(username.trim() === "" || password.trim() === "")) handleSubmit(e)}} />
+            <TextField label="Passwort" variant="outlined" fullWidth margin="normal" value={password} onChange={(e) => setPassword(e.target.value)} error={alertOpen} type="password" onKeyDown={(e) => {if (e.key === "Enter" && !(username.trim() === "" || password.trim() === "")) handleSubmit(e)}} />
+            <Button variant="contained" fullWidth onClick={handleSubmit} endIcon={<LoginIcon />} disabled={username.trim() === "" || password.trim() === ""}>
+              <Typography variant="button">Anmelden</Typography>
             </Button>
 
             <Divider aria-hidden="true" orientation="horizontal" textAlign="center">

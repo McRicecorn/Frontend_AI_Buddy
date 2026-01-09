@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 import { Login } from './Pages/Login';
 import Classroom from './Pages/Classroom';
+import SubjectSelection from './Pages/SubjectSelection';
 import type { IChatMessage } from './Interfaces/IChatMessage';
+import { Subject } from '../src/classes/Subject'
 
 const theme = createTheme({
   colorSchemes: {
@@ -36,6 +38,21 @@ function App() {
   const [password, setPassword] = useState<string | null>(null)
   const [messages, setMessages] = useState<IChatMessage[]>([
     { id: '1', sender: 'ai', text: 'hi', timestamp: new Date() },
+  ])
+  const [subjects, setSubjects] = useState<Subject[] | null>([
+    new Subject("Deutsch"),
+    new Subject("Englisch"),
+    new Subject("Französisch"),
+    new Subject("Latein"),
+    new Subject("Mathematik"),
+    new Subject("Physik", 2),
+    new Subject("Informatik"),
+    new Subject("Biologie"),
+    new Subject("Chemie"),
+    new Subject("Geographie"),
+    new Subject("Kunst"),
+    new Subject("Musik", 1),
+    new Subject("Sport"),
   ])
 
   const handleLogin = (name: string, pw: string) => {
@@ -71,7 +88,7 @@ function App() {
         {!username || !password ? (
           <Login onLogin={handleLogin} />
         ) : (
-          <Classroom username={username} messages={messages} onSend={handleSend} />
+          <SubjectSelection username={username} subjects={subjects} />
         )}
       </div>
     </ThemeProvider>
