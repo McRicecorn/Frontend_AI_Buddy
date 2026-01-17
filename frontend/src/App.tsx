@@ -3,6 +3,7 @@ import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 import { Login } from './Pages/Login';
 import Classroom from './Pages/Classroom';
 import type { IChatMessage } from './Interfaces/IChatMessage';
+import { OnBoarding } from './Pages/OnBoarding';
 
 const theme = createTheme({
   colorSchemes: {
@@ -25,13 +26,13 @@ function App() {
 
   const AI_Response: string[] = [
     'Interessante Frage!',
-    'Darüber können wir sprechen 🙂',
+    'Darüber können wir sprechen',
     'Gute Beobachtung.',
     'Lass uns das gemeinsam anschauen.',
   ]
 
 
-  
+  const [completedOnBoarding, setCompletedOnboarding] = useState<boolean>(false)
   const [username, setUsername] = useState<string | null>(null)
   const [password, setPassword] = useState<string | null>(null)
   const [messages, setMessages] = useState<IChatMessage[]>([
@@ -64,12 +65,20 @@ function App() {
 };
 
 
+const handleOnboardingComplete = (interests: string[]) => {
+  console.log('User interests:', interests);
+  setCompletedOnboarding(true);
+};
+
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline enableColorScheme/>
       <div className="app-container">
         {!username || !password ? (
           <Login onLogin={handleLogin} />
+        ) : !completedOnBoarding ? (
+          <OnBoarding onComplete={handleOnboardingComplete} name={username} />
         ) : (
           <Classroom username={username} messages={messages} onSend={handleSend} />
         )}
