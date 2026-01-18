@@ -5,12 +5,15 @@ import { Login } from './Pages/Login'
 import SubjectSelection from './Pages/SubjectSelection'
 import type { IChatMessage } from './Interfaces/IChatMessage'
 import { Subject } from '../src/classes/Subject'
+import { SchoolClass } from './classes/SchoolClass'
 import NotFound from './Pages/NotFound'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 import SubjectRoute from './components/SubjectRoute/SubjectRoute'
 import AppLayout from './components/AppLayout/AppLayout'
-import { OnBoarding } from './Pages/OnBoarding';
-import Classroom from './Pages/Classroom';
+import { OnBoarding } from './Pages/OnBoarding'
+import Administration from './Pages/Administration'
+import ClassRoute from './components/ClassRoute/ClassRoute'
+import Classroom from './Pages/Classroom'
 
 const theme = createTheme({
   colorSchemes: {
@@ -40,6 +43,9 @@ function App() {
 
 
   const [completedOnBoarding, setCompletedOnboarding] = useState<boolean>(false)
+  const [loggedInAsTeacher, setLoggedInAsTeacher] = useState<boolean>(() => {
+    return sessionStorage.getItem("isTeacher") === "true"; // nur für Demo
+  })
   const [username, setUsername] = useState<string | null>(() => {
     return sessionStorage.getItem("username") // nur für Demo
   })
@@ -65,12 +71,25 @@ function App() {
     new Subject("Sport"),
   ])
 
+  const [schoolClasses, setSchoolClasses] = useState<SchoolClass[] | null>([
+    new SchoolClass(5, "a"),
+    new SchoolClass(7, "a"),
+    new SchoolClass(10, "b"),
+  ])
+
   const handleLogin = (name: string, pw: string) => {
     setUsername(name)
     setPassword(pw)
 
     sessionStorage.setItem("username", name) // nur für Demo
     sessionStorage.setItem("password", pw) // nur für Demo
+
+    if (name.toLowerCase() === "lehrer") {
+      sessionStorage.setItem("isTeacher", "true") // nur für Demo
+      setLoggedInAsTeacher(true)
+    } else {
+      sessionStorage.setItem("isTeacher", "false")
+    }
   }
 
   const handleLogout = () => {
@@ -79,6 +98,9 @@ function App() {
 
     sessionStorage.removeItem("username") // nur für Demo
     sessionStorage.removeItem("password") // nur für Demo
+    sessionStorage.removeItem("isTeacher") // nur für Demo
+
+    setLoggedInAsTeacher(false)
   }
 
    const handleSend = (message: IChatMessage) => {
@@ -113,11 +135,13 @@ const handleOnboardingComplete = (interests: string[]) => {
       <ThemeProvider theme={theme}>
         <CssBaseline enableColorScheme/>
         <Routes>
-          <Route path="/login" element={<Login onLogin={handleLogin} />} />
-          <Route path="/" element={<ProtectedRoute condition={!!username && !!password}><AppLayout username={username!} onLogout={handleLogout} /></ProtectedRoute>} >
+          <Route path="/login" element={<Login onLogin={handleLogin} completedOnBoarding={completedOnBoarding} />} />
+          <Route path="/onboarding" element={<ProtectedRoute condition={!!username && !!password}><OnBoarding onComplete={handleOnboardingComplete} name={username!} /></ProtectedRoute>} />
+          <Route path="/" element={<ProtectedRoute condition={!!username && !!password}><AppLayout username={username!} onLogout={handleLogout} teacher={loggedInAsTeacher} /></ProtectedRoute>} >
             <Route index element={<ProtectedRoute condition={!!username && !!password}><SubjectSelection username={username!} subjects={subjects} /></ProtectedRoute>} />
-            <Route path="onboarding" element={<ProtectedRoute condition={!!username && !!password}><OnBoarding onComplete={handleOnboardingComplete} name={username!} /></ProtectedRoute>} />
             <Route path="classroom/:subject" element={<ProtectedRoute condition={!!username && !!password}><SubjectRoute subjects={subjects} username={username!} messages={messages} onSend={handleSend} /></ProtectedRoute>} />
+            <Route path="administration" element={<ProtectedRoute condition={!!username && !!password && !!loggedInAsTeacher}><Administration schoolClasses={schoolClasses} /></ProtectedRoute>} />
+            <Route path="schoolclass/:schoolClass" element={<ProtectedRoute condition={!!username && !!password && !!loggedInAsTeacher}><ClassRoute schoolClasses={schoolClasses} /></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

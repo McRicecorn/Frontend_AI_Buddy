@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import './Character.css';
 // @ts-ignore
-import { TalkingHead } from "../../../modules/talkinghead.mjs";
+import { TalkingHead } from "../../../public/modules/talkinghead.mjs";
 
 const Character: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);

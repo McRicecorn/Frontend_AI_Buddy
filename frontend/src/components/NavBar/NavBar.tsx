@@ -7,8 +7,9 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import SchoolIcon from '@mui/icons-material/School';
 import type { INavBarProps } from '../../Interfaces/INavBarProps'
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
-const NavBar: React.FC<INavBarProps>  = ({ username, onLogout }) => {
+const NavBar: React.FC<INavBarProps>  = ({ username, onLogout, teacher }) => {
     // profile
     const [anchorElProfile, setAnchorElProfile] = useState<null | HTMLElement>(null)
 
@@ -38,6 +39,11 @@ const NavBar: React.FC<INavBarProps>  = ({ username, onLogout }) => {
     const handleNavToSubjectSelection = () => {
         handleCloseMenu()
         navigate("/")
+    }
+
+    const handleNavToAdministration = () => {
+        handleCloseMenu()
+        navigate("/administration")
     }
 
     return (
@@ -123,6 +129,10 @@ const NavBar: React.FC<INavBarProps>  = ({ username, onLogout }) => {
                                 {
                                     location.pathname != "/" &&
                                     <MenuItem onClick={handleNavToSubjectSelection}><ListItemIcon><SchoolIcon sx={{ mr: 2 }}/></ListItemIcon><ListItemText sx={{ mr: 1 }}>Fachauswahl</ListItemText></MenuItem>
+                                }
+                                {
+                                    teacher && location.pathname != "/administration" &&
+                                    <MenuItem onClick={handleNavToAdministration}><ListItemIcon><AdminPanelSettingsIcon sx={{ mr: 2 }}/></ListItemIcon><ListItemText sx={{ mr: 1 }}>Verwaltung</ListItemText></MenuItem>
                                 }
                                 <MenuItem onClick={handleCloseMenu}><ListItemIcon><SettingsIcon sx={{ mr: 2 }}/></ListItemIcon><ListItemText sx={{ mr: 1 }}>Einstellungen</ListItemText></MenuItem>
                             </MenuList>
