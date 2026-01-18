@@ -4,6 +4,7 @@ import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 
 import './OnBoarding.css';
 import Character from '../components/Character/Character';
+import { useNavigate } from 'react-router-dom';
 
 interface OnBoardingProps {
   name: string;
@@ -14,6 +15,7 @@ interface OnBoardingProps {
 export const OnBoarding: React.FC<OnBoardingProps> = ({ onComplete, name }) => {
   const [interestsInput, setInterestsInput] = useState<string>('');
   const [alertOpen, setAlertOpen] = useState<boolean>(false)
+  const navigate = useNavigate();
 
   const interests = interestsInput
     .split(',')
@@ -28,6 +30,7 @@ export const OnBoarding: React.FC<OnBoardingProps> = ({ onComplete, name }) => {
     }
 
     onComplete(interests);
+    navigate("/", { replace: true })
 }
 
   return (
@@ -48,7 +51,7 @@ export const OnBoarding: React.FC<OnBoardingProps> = ({ onComplete, name }) => {
               )}
               <TextField label="Deine Interessen" placeholder='z.B. Mathe, Fußball, Geschichte' variant="outlined" fullWidth margin="normal" value={interestsInput} onChange={(e) => setInterestsInput(e.target.value)} error={alertOpen}/>
               <Button variant="contained" fullWidth onClick={handleSubmit} endIcon={<MeetingRoomIcon />} disabled={interests.length === 0}>
-                <Typography variant="button">Ins Klassenzimmer</Typography>
+                <Typography variant="button">Zur Fächerauswahl</Typography>
               </Button>
 
               <Divider aria-hidden="true" orientation="horizontal" textAlign="center">

@@ -7,19 +7,21 @@ import './Login.css';
 
 interface LoginProps {
   onLogin: (username: string, password: string) => void
+  completedOnBoarding: boolean
 }
 
-export const Login: React.FC<LoginProps> = ({ onLogin }) => {
+export const Login: React.FC<LoginProps> = ({ onLogin, completedOnBoarding }) => {
   const navigate = useNavigate();
   const [username, setUsername] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [alertOpen, setAlertOpen] = useState<boolean>(false)
 
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (username.trim() !== '' && password.trim() !== '') {
       onLogin(username.trim(), password.trim())
-      navigate("/", { replace: true })
+      completedOnBoarding ? navigate("/", { replace: true }) : navigate("/onboarding");
     } else {
       setAlertOpen(true)
     }
