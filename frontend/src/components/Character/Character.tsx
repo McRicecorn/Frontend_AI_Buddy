@@ -3,6 +3,7 @@ import './Character.css';
 // @ts-ignore
 import { TalkingHead } from "talkinghead";
 
+
 const Character: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const headRef = useRef<any>(null);
@@ -43,11 +44,16 @@ const Character: React.FC = () => {
     return (
         <div className="character-container">
             {/* Avatar gerendert */}
-            <div 
-                ref={containerRef} 
-                className="character-avatar" 
-                style={{ width: '100%', height: '100%' }}
+            <div
+                ref={containerRef}
+                className="character-avatar"
+                style={{
+                    width: 360,
+                    height: 520,
+                    background: "rgba(255,0,0,0.12)", // Debug: sieht man sofort
+                }}
             />
+
             <div className="character-name">
                 Rosalind Franklin
             </div>
