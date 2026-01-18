@@ -1,14 +1,12 @@
-import React from 'react';
-import { Typography, Box, Grid } from '@mui/material';
+import React from 'react'
+import { Typography, Box, Grid } from '@mui/material'
 
-import NavBar from '../components/NavBar/NavBar';
 import type { ISubjectSelectionProps } from '../Interfaces/ISubjectSelectionProps'
 import SubjectCard from '../components/SubjectCard/SubjectCard'
 
 const SubjectSelection: React.FC<ISubjectSelectionProps>  = ({ username, subjects }) => {
   return (
     <Box sx={{width: "100vw", height: "100vh", overflowY: "auto"}}>
-        <NavBar username={username} />
         <Box sx={{marginLeft: '32px', marginRight: '32px', marginTop: '32px'}}>
             <Typography variant='h3' component='h1' gutterBottom sx={{ ml: 0.5, overflow: "hidden", textOverflow: "ellipsis" }}>Hallo, {username}!</Typography>
             <Typography variant='subtitle1' sx={{ ml: 0.5 }}>Wähle ein Fach, um zu beginnen.</Typography>

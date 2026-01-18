@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { Stack, Card, Divider, CardContent, Typography, Button, TextField, Alert, Fade } from '@mui/material';
-import LoginIcon from '@mui/icons-material/Login';
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Stack, Card, Divider, CardContent, Typography, Button, TextField, Alert, Fade } from '@mui/material'
+import LoginIcon from '@mui/icons-material/Login'
 
 import './Login.css';
 
@@ -9,6 +10,7 @@ interface LoginProps {
 }
 
 export const Login: React.FC<LoginProps> = ({ onLogin }) => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [alertOpen, setAlertOpen] = useState<boolean>(false)
@@ -17,6 +19,7 @@ export const Login: React.FC<LoginProps> = ({ onLogin }) => {
     e.preventDefault();
     if (username.trim() !== '' && password.trim() !== '') {
       onLogin(username.trim(), password.trim())
+      navigate("/", { replace: true })
     } else {
       setAlertOpen(true)
     }

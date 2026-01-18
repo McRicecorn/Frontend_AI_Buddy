@@ -1,14 +1,14 @@
-import React from 'react';
-import Character from '../components/Character/Character';
-import { ChatBoard } from '../components/Chatboard/Chatboard';
-import InputBox from '../components/InputBox/InputBox';
-import type { IChatMessage } from '../Interfaces/IChatMessage';
-import StatusBar from '../components/Status/StatusBar';
-import { MediaPanel } from '../components/MediaPanel/MediaPanel';
-import { MediaItem } from '../components/MediaItem/MediaItem';
-import { MediaType } from '../enums/MediaType';
+import React from 'react'
+import { useParams } from 'react-router-dom'
+import Character from '../components/Character/Character'
+import { ChatBoard } from '../components/Chatboard/Chatboard'
+import InputBox from '../components/InputBox/InputBox'
+import type { IChatMessage } from '../Interfaces/IChatMessage'
+import StatusBar from '../components/Status/StatusBar'
+import { MediaPanel } from '../components/MediaPanel/MediaPanel'
+import { MediaItem } from '../components/MediaItem/MediaItem'
+import { MediaType } from '../enums/MediaType'
 import './Classroom.css'
-import NavBar from '../components/NavBar/NavBar';
 
 interface ClassroomProps {
   username: string;
@@ -34,18 +34,18 @@ const dummyMedia2 = new MediaItem(
 let dummyMedia = [dummyMedia1,dummyMedia2]
 
 const Classroom: React.FC<ClassroomProps> = ({ username, messages, onSend }) => {
+  const { subject } = useParams<{ subject: string }>()
+
   return (
     <div className="classroom">
-      <NavBar username={username} />
-
       <div className="content">
         <div className='left'>
           <Character />
-          <StatusBar username={username} />
+          <StatusBar username={username} subject={subject} />
         </div>
 
         <div className='middle'>
-          <MediaPanel media={dummyMedia}/>
+          <MediaPanel media={dummyMedia} />
         </div>  
 
 

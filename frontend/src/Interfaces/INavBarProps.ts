@@ -1,3 +1,4 @@
 export interface INavBarProps {
-  username: string;
+  username: string
+  onLogout: () => void
 }

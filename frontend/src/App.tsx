@@ -1,10 +1,14 @@
-import { useState } from 'react';
-import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
-import { Login } from './Pages/Login';
-import Classroom from './Pages/Classroom';
-import SubjectSelection from './Pages/SubjectSelection';
-import type { IChatMessage } from './Interfaces/IChatMessage';
+import { useState } from 'react'
+import { Routes, Route, BrowserRouter } from 'react-router-dom'
+import { ThemeProvider, createTheme, CssBaseline } from '@mui/material'
+import { Login } from './Pages/Login'
+import SubjectSelection from './Pages/SubjectSelection'
+import type { IChatMessage } from './Interfaces/IChatMessage'
 import { Subject } from '../src/classes/Subject'
+import NotFound from './Pages/NotFound'
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
+import SubjectRoute from './components/SubjectRoute/SubjectRoute'
+import AppLayout from './components/AppLayout/AppLayout'
 
 const theme = createTheme({
   colorSchemes: {
@@ -34,8 +38,12 @@ function App() {
 
 
   
-  const [username, setUsername] = useState<string | null>(null)
-  const [password, setPassword] = useState<string | null>(null)
+  const [username, setUsername] = useState<string | null>(() => {
+    return sessionStorage.getItem("username") // nur für Demo
+  })
+  const [password, setPassword] = useState<string | null>(() => {
+  return sessionStorage.getItem("password") // nur für Demo
+  })
   const [messages, setMessages] = useState<IChatMessage[]>([
     { id: '1', sender: 'ai', text: 'hi', timestamp: new Date() },
   ])
@@ -58,6 +66,17 @@ function App() {
   const handleLogin = (name: string, pw: string) => {
     setUsername(name)
     setPassword(pw)
+
+    sessionStorage.setItem("username", name) // nur für Demo
+    sessionStorage.setItem("password", pw) // nur für Demo
+  }
+
+  const handleLogout = () => {
+    setUsername(null)
+    setPassword(null)
+
+    sessionStorage.removeItem("username") // nur für Demo
+    sessionStorage.removeItem("password") // nur für Demo
   }
 
    const handleSend = (message: IChatMessage) => {
@@ -82,16 +101,19 @@ function App() {
 
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline enableColorScheme/>
-      <div className="app-container">
-        {!username || !password ? (
-          <Login onLogin={handleLogin} />
-        ) : (
-          <SubjectSelection username={username} subjects={subjects} />
-        )}
-      </div>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <CssBaseline enableColorScheme/>
+        <Routes>
+          <Route path="/login" element={<Login onLogin={handleLogin} />} />
+          <Route path="/" element={<ProtectedRoute condition={!!username && !!password}><AppLayout username={username!} onLogout={handleLogout} /></ProtectedRoute>} >
+            <Route index element={<ProtectedRoute condition={!!username && !!password}><SubjectSelection username={username!} subjects={subjects} /></ProtectedRoute>} />
+            <Route path="classroom/:subject" element={<ProtectedRoute condition={!!username && !!password}><SubjectRoute subjects={subjects} username={username!} messages={messages} onSend={handleSend} /></ProtectedRoute>} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </ThemeProvider>
+    </BrowserRouter>
   )
 }
 
