@@ -9,6 +9,8 @@ import NotFound from './Pages/NotFound'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 import SubjectRoute from './components/SubjectRoute/SubjectRoute'
 import AppLayout from './components/AppLayout/AppLayout'
+import { OnBoarding } from './Pages/OnBoarding';
+import Classroom from './Pages/Classroom';
 
 const theme = createTheme({
   colorSchemes: {
@@ -31,13 +33,13 @@ function App() {
 
   const AI_Response: string[] = [
     'Interessante Frage!',
-    'Darüber können wir sprechen 🙂',
+    'Darüber können wir sprechen',
     'Gute Beobachtung.',
     'Lass uns das gemeinsam anschauen.',
   ]
 
 
-  
+  const [completedOnBoarding, setCompletedOnboarding] = useState<boolean>(false)
   const [username, setUsername] = useState<string | null>(() => {
     return sessionStorage.getItem("username") // nur für Demo
   })
@@ -100,6 +102,12 @@ function App() {
 };
 
 
+const handleOnboardingComplete = (interests: string[]) => {
+  console.log('User interests:', interests);
+  setCompletedOnboarding(true);
+};
+
+
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
@@ -108,6 +116,7 @@ function App() {
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
           <Route path="/" element={<ProtectedRoute condition={!!username && !!password}><AppLayout username={username!} onLogout={handleLogout} /></ProtectedRoute>} >
             <Route index element={<ProtectedRoute condition={!!username && !!password}><SubjectSelection username={username!} subjects={subjects} /></ProtectedRoute>} />
+            <Route path="onboarding" element={<ProtectedRoute condition={!!username && !!password}><OnBoarding onComplete={handleOnboardingComplete} name={username!} /></ProtectedRoute>} />
             <Route path="classroom/:subject" element={<ProtectedRoute condition={!!username && !!password}><SubjectRoute subjects={subjects} username={username!} messages={messages} onSend={handleSend} /></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Route>
