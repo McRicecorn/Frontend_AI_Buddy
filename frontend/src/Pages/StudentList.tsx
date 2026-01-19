@@ -13,6 +13,7 @@ import {
   Paper
 } from '@mui/material'
 import type { User } from '../classes/User';
+import AddIcon from '@mui/icons-material/Add';
 
 
 interface IStudentListProps {
@@ -43,28 +44,31 @@ const StudentList: React.FC<IStudentListProps> = ({ className, students, addStud
 
   return (
     <Box sx={{ width: "100vw", height: "100vh", overflowY: "auto" }}>
-      <Box sx={{ mx: 4, mt: 4 }}>
+      <Box sx={{ m: '32px', mb: '132px' }}>
         <Typography variant="h3" component="h1" gutterBottom>
           Klasse {className}
         </Typography>
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
         <Typography variant="subtitle1">
-          Schüler:
+          Schüler hinzufügen:
         </Typography>
 
         <TextField
-          label="Name des Schülers"
+          label="Name"
           variant="outlined"
           size="small"
           value={newName}
           onChange={(e) => setNewName(e.target.value)}
+          onKeyDown={(e) => {if (e.key === "Enter" && !(newName.trim() === "")) handleAddStudent()}}
         />
 
         <Button 
           variant="contained" 
           color="primary" 
           onClick={handleAddStudent}
+          endIcon={<AddIcon />}
+          disabled={newName.trim() === ""}
         >
           Hinzufügen
         </Button>
@@ -73,7 +77,7 @@ const StudentList: React.FC<IStudentListProps> = ({ className, students, addStud
     
 
 
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} sx={{ borderRadius: 4 }}>
           <Table>
             <TableHead>
               <TableRow>
