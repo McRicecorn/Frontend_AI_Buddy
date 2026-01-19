@@ -1,22 +1,31 @@
-import React, { useState } from 'react';
-import { Stack, Card, Divider, CardContent, Typography, Button, TextField, Alert, Fade } from '@mui/material';
-import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Stack, Card, Divider, CardContent, Typography, Button, TextField, Alert, Fade } from '@mui/material'
+import LoginIcon from '@mui/icons-material/Login'
 
 import './Login.css';
 
 interface LoginProps {
   onLogin: (username: string, password: string) => void
+  completedOnBoarding: boolean
 }
 
-export const Login: React.FC<LoginProps> = ({ onLogin }) => {
+export const Login: React.FC<LoginProps> = ({ onLogin, completedOnBoarding }) => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [alertOpen, setAlertOpen] = useState<boolean>(false)
 
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (username.trim() !== '' && password.trim() !== '') {
       onLogin(username.trim(), password.trim())
+      if (completedOnBoarding) {
+        navigate("/", { replace: true })
+      } else {
+        navigate("/onboarding")
+      }
     } else {
       setAlertOpen(true)
     }
@@ -37,10 +46,10 @@ export const Login: React.FC<LoginProps> = ({ onLogin }) => {
                 <Alert severity="error">Dein Benutzername oder dein Passwort ist falsch!</Alert>
               </Fade>
             )}
-            <TextField label="Dein Benutzername" variant="outlined" fullWidth margin="normal" value={username} onChange={(e) => setUsername(e.target.value)} error={alertOpen}/>
-            <TextField label="Dein Passwort" variant="outlined" fullWidth margin="normal" value={password} onChange={(e) => setPassword(e.target.value)} error={alertOpen} type="password" />
-            <Button variant="contained" fullWidth onClick={handleSubmit} endIcon={<MeetingRoomIcon />} disabled={username.trim() === "" || password.trim() === ""}>
-              <Typography variant="button">Ins Klassenzimmer</Typography>
+            <TextField label="Benutzername" variant="outlined" fullWidth margin="normal" value={username} onChange={(e) => setUsername(e.target.value)} error={alertOpen} onKeyDown={(e) => {if (e.key === "Enter" && !(username.trim() === "" || password.trim() === "")) handleSubmit(e)}} />
+            <TextField label="Passwort" variant="outlined" fullWidth margin="normal" value={password} onChange={(e) => setPassword(e.target.value)} error={alertOpen} type="password" onKeyDown={(e) => {if (e.key === "Enter" && !(username.trim() === "" || password.trim() === "")) handleSubmit(e)}} />
+            <Button variant="contained" fullWidth onClick={handleSubmit} endIcon={<LoginIcon />} disabled={username.trim() === "" || password.trim() === ""}>
+              <Typography variant="button">Anmelden</Typography>
             </Button>
 
             <Divider aria-hidden="true" orientation="horizontal" textAlign="center">
