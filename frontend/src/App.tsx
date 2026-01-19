@@ -13,7 +13,7 @@ import AppLayout from './components/AppLayout/AppLayout'
 import { OnBoarding } from './Pages/OnBoarding'
 import Administration from './Pages/Administration'
 import ClassRoute from './components/ClassRoute/ClassRoute'
-import Classroom from './Pages/Classroom'
+import { User } from './classes/User'
 
 const theme = createTheme({
   colorSchemes: {
@@ -71,10 +71,16 @@ function App() {
     new Subject("Sport"),
   ])
 
-  const [schoolClasses, setSchoolClasses] = useState<SchoolClass[] | null>([
+  const [schoolClasses, setSchoolClasses] = useState<SchoolClass[]>([
     new SchoolClass(5, "a"),
     new SchoolClass(7, "a"),
     new SchoolClass(10, "b"),
+  ])
+
+  const [users, setUsers] = useState<User[]>([
+    new User("Max", schoolClasses[0].name, 1),
+    new User("Jessie", schoolClasses[0].name, 2),
+    new User("Panda", schoolClasses[2].name, 3),
   ])
 
   const handleLogin = (name: string, pw: string) => {
@@ -92,6 +98,9 @@ function App() {
     }
   }
 
+  const addStudent = (newStudent: User) => {
+    setUsers((prevUsers) => [...prevUsers, newStudent]);
+  }
   const handleLogout = () => {
     setUsername(null)
     setPassword(null)
@@ -141,7 +150,7 @@ const handleOnboardingComplete = (interests: string[]) => {
             <Route index element={<ProtectedRoute condition={!!username && !!password}><SubjectSelection username={username!} subjects={subjects} /></ProtectedRoute>} />
             <Route path="classroom/:subject" element={<ProtectedRoute condition={!!username && !!password}><SubjectRoute subjects={subjects} username={username!} messages={messages} onSend={handleSend} /></ProtectedRoute>} />
             <Route path="administration" element={<ProtectedRoute condition={!!username && !!password && !!loggedInAsTeacher}><Administration schoolClasses={schoolClasses} /></ProtectedRoute>} />
-            <Route path="schoolclass/:schoolClass" element={<ProtectedRoute condition={!!username && !!password && !!loggedInAsTeacher}><ClassRoute schoolClasses={schoolClasses} /></ProtectedRoute>} />
+            <Route path="schoolclass/:schoolClass" element={<ProtectedRoute condition={!!username && !!password && !!loggedInAsTeacher}><ClassRoute schoolClasses={schoolClasses} users={users} addStudent={addStudent} /></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
